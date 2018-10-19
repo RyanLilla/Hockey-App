@@ -1,4 +1,4 @@
-﻿@page
+﻿@page "{id:int?}"
 @model HockeyApp.Pages.Teams.DetailsModel
 
 @{
@@ -22,6 +22,47 @@
         </dt>
         <dd>
             @Html.DisplayFor(model => model.Team.TeamLocation)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Team.Players)
+        </dt>
+        <dd>
+            <table class="table">
+                <tr>
+                    <th>Player Name</th>
+                    <th>Position</th>
+                </tr>
+                @foreach (var item in Model.Team.Players)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FullName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Position)
+                        </td>
+                    </tr>
+                }
+            </table>
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Team.Coach)
+        </dt>
+        <dd>
+            <table class="table">
+                <tr>
+                    <th>Name</th>
+                    <th>Hired</th>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(model => model.Team.Coach.FullName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.Team.Coach.HireDate)
+                    </td>
+                </tr>
+            </table>
         </dd>
     </dl>
 </div>

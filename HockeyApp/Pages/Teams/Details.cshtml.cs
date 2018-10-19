@@ -27,7 +27,11 @@ namespace HockeyApp.Pages.Teams
                 return NotFound();
             }
 
-            Team = await _context.Team.FirstOrDefaultAsync(m => m.ID == id);
+            Team = await _context.Team
+                .Include(t => t.Players)
+                .Include(t => t.Coach)
+                .AsNoTracking()
+                .FirstOrDefaultAsync(m => m.ID == id);
 
             if (Team == null)
             {
