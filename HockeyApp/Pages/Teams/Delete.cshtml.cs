@@ -20,20 +20,29 @@ namespace HockeyApp.Pages.Teams
 
         [BindProperty]
         public Team Team { get; set; }
+        public string ErrorMessage { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public async Task<IActionResult> OnGetAsync(int? id, bool? saveChangesError = false)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            Team = await _context.Team.FirstOrDefaultAsync(m => m.ID == id);
+            Team = await _context.Team
+                .AsNoTracking()
+                .FirstOrDefaultAsync(m => m.ID == id);
 
             if (Team == null)
             {
                 return NotFound();
             }
+
+            if (saveChangesError.GetValueOrDefault())
+            {
+                ErrorMessage = "Delete failed. Try again";
+            }
+
             return Page();
         }
 
@@ -41,18 +50,32 @@ namespace HockeyApp.Pages.Teams
         {
             if (id == null)
             {
+                
+            }
+
+            var team = await _context.Team
+                .AsNoTracking()
+                .FirstOrDefaultAsync(m => m.ID == id);
+
+            if (Team == null)
+            {
                 return NotFound();
             }
 
-            Team = await _context.Team.FindAsync(id);
-
-            if (Team != null)
+            try
             {
-                _context.Team.Remove(Team);
+                _context.Team.Remove(team);
                 await _context.SaveChangesAsync();
+                return RedirectToPage("./Index");
             }
+            catch (DbUpdateException /* ex */)
+            {
+                //Log the error (uncomment ex variable name and write a log.)
 
-            return RedirectToPage("./Index");
+                // If Remove() fails, OnGetAsync is called with savesChangesError=true
+                return RedirectToAction("./Delete",
+                                     new { id, saveChangesError = true });
+            }
         }
     }
 }

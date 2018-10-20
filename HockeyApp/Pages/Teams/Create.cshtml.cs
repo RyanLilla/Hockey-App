@@ -33,10 +33,20 @@ namespace HockeyApp.Pages.Teams
                 return Page();
             }
 
-            _context.Team.Add(Team);
-            await _context.SaveChangesAsync();
+            var emptyTeam = new Team();
 
-            return RedirectToPage("./Index");
+            if (await TryUpdateModelAsync<Team>(
+                emptyTeam,
+                "team",     // Prefix for form value
+                t => t.TeamName, t => t.TeamLocation))
+            {
+                _context.Team.Add(emptyTeam);
+                await _context.SaveChangesAsync();
+                return RedirectToPage("./Index");
+            }
+
+            return null;
+            
         }
     }
 }

@@ -1,9 +1,30 @@
 ﻿@page
 @model AboutModel
 @{
-    ViewData["Title"] = "About";
+    ViewData["Title"] = "Team Statistics";
 }
-<h2>@ViewData["Title"]</h2>
-<h3>@Model.Message</h3>
 
-<p>Use this area to provide additional information.</p>
+<h2>Team Statistics</h2>
+
+<table>
+    <tr>
+        <th>
+            Location
+        </th>
+        <th>
+            Teams
+        </th>
+    </tr>
+
+    @foreach (var item in Model.Team)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.LocationName)
+            </td>
+            <td>
+                @item.TeamCount
+            </td>
+        </tr>
+    }
+</table>

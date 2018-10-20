@@ -22,14 +22,15 @@ namespace HockeyApp.Pages.Teams
         [BindProperty]
         public Team Team { get; set; }
 
+        // Called when user navigates to /Teams/Edit/<id>
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
-
-            Team = await _context.Team.FirstOrDefaultAsync(m => m.ID == id);
+            
+            Team = await _context.Team.FindAsync(id);
 
             if (Team == null)
             {
@@ -38,37 +39,29 @@ namespace HockeyApp.Pages.Teams
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync()
+        // Called when the user submits data to the page at /Team/Edit/<id>
+        public async Task<IActionResult> OnPostAsync(int? id)
         {
             if (!ModelState.IsValid)
             {
                 return Page();
             }
 
-            _context.Attach(Team).State = EntityState.Modified;
+            // Chose FindAsync over FirstOrDefaultAsync 
+            // Better choice when selecting an entity from a primary key
+            var teamToUpdate = await _context.Team.FindAsync(id);   
 
-            try
+            // Attempts to update Team with the listed properties
+            if (await TryUpdateModelAsync<Team>(
+                teamToUpdate,
+                "team",     // Prefix for form value.
+                t => t.TeamName, t => t.TeamLocation))
             {
                 await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!TeamExists(Team.ID))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                return RedirectToPage("./Index");
             }
 
-            return RedirectToPage("./Index");
-        }
-
-        private bool TeamExists(int id)
-        {
-            return _context.Team.Any(e => e.ID == id);
+            return Page();
         }
     }
 }
