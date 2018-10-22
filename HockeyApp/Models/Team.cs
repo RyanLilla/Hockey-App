@@ -10,7 +10,9 @@ namespace HockeyApp.Models
     {
         public int ID { get; set; }
         public int? CoachID { get; set; }
-        
+        public int DivisionID { get; set; }
+        public int ConferenceID { get; set; }
+
         [Display(Name = "Team")]
         public string TeamName { get; set; }
 
@@ -18,6 +20,8 @@ namespace HockeyApp.Models
         public string TeamLocation { get; set; }
 
         public Coach Coach { get; set; }
+        public Division Division { get; set; }
+        public Conference Conference { get; set; }
 
         public ICollection<Player> Players { get; set; }
     }

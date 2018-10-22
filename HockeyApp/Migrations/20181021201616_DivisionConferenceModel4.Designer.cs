@@ -4,14 +4,16 @@ using HockeyApp.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace HockeyApp.Migrations
 {
     [DbContext(typeof(LeagueContext))]
-    partial class LeagueContextModelSnapshot : ModelSnapshot
+    [Migration("20181021201616_DivisionConferenceModel4")]
+    partial class DivisionConferenceModel4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -131,7 +133,7 @@ namespace HockeyApp.Migrations
                         .WithMany()
                         .HasForeignKey("CoachID");
 
-                    b.HasOne("HockeyApp.Models.Conference", "Conference")
+                    b.HasOne("HockeyApp.Models.Conference")
                         .WithMany("Teams")
                         .HasForeignKey("ConferenceID");
 

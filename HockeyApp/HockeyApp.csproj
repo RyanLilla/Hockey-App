@@ -5,6 +5,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20181021190321_DivisionConferenceModel.cs" />
+    <Compile Remove="Migrations\20181021190321_DivisionConferenceModel.Designer.cs" />
+    <Compile Remove="Migrations\20181021190538_DivisionConferenceModel2.cs" />
+    <Compile Remove="Migrations\20181021190538_DivisionConferenceModel2.Designer.cs" />
+    <Compile Remove="Migrations\20181021190927_DivisionConferenceModel3.cs" />
+    <Compile Remove="Migrations\20181021190927_DivisionConferenceModel3.Designer.cs" />
+    <Compile Remove="Migrations\20181021191236_DivisionConferenceModel4.cs" />
+    <Compile Remove="Migrations\20181021191236_DivisionConferenceModel4.Designer.cs" />
+    <Compile Remove="Migrations\20181021191609_DivisionConferenceModel5.cs" />
+    <Compile Remove="Migrations\20181021191609_DivisionConferenceModel5.Designer.cs" />
+    <Compile Remove="Migrations\20181021194543_DivisionConferenceModel3.cs" />
+    <Compile Remove="Migrations\20181021194543_DivisionConferenceModel3.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" />
   </ItemGroup>

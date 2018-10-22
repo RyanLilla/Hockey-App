@@ -8,20 +8,26 @@
 <h2>Details</h2>
 
 <div>
-    <h4>Team</h4>
+    <h3>@Html.DisplayFor(model => model.Team.TeamName)</h3>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Team.TeamName)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Team.TeamName)
-        </dd>
         <dt>
             @Html.DisplayNameFor(model => model.Team.TeamLocation)
         </dt>
         <dd>
             @Html.DisplayFor(model => model.Team.TeamLocation)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Team.Division.DivisionName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Team.Division.DivisionName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Team.Conference.ConferenceName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Team.Conference.ConferenceName)
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.Team.Players)
@@ -67,6 +73,6 @@
     </dl>
 </div>
 <div>
-    <a asp-page="./Edit" asp-route-id="@Model.Team.ID">Edit</a> |
+    @*<a asp-page="./Edit" asp-route-id="@Model.Team.ID">Edit</a> |*@
     <a asp-page="./Index">Back to List</a>
 </div>

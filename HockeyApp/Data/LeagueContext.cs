@@ -16,5 +16,8 @@ namespace HockeyApp.Models
         public DbSet<Team> Team { get; set; }
         public DbSet<Player> Player { get; set; }
         public DbSet<Coach> Coach { get; set; }
+        public DbSet<Division> Division { get; set; }
+        public DbSet<Conference> Conference { get; set; }
+
     }
 }

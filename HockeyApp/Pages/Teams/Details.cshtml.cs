@@ -30,6 +30,8 @@ namespace HockeyApp.Pages.Teams
             Team = await _context.Team
                 .Include(t => t.Players)
                 .Include(t => t.Coach)
+                .Include(t => t.Division)
+                .Include(t => t.Conference)
                 .AsNoTracking()
                 .FirstOrDefaultAsync(m => m.ID == id);
 
